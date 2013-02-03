@@ -48,8 +48,6 @@ extern void __libc_init_array(void);
 
 extern int main(int, char**, char**);
 
-extern void exit(int) __attribute__((noreturn, weak));
-
 /* The linker must ensure that these are at least 4-byte aligned. */
 extern char __data_start__, __data_end__;
 extern char __bss_start__, __bss_end__;
@@ -85,9 +83,6 @@ void __attribute__((noreturn)) start_c(void) {
 
     /* Jump to main. */
     exit_code = main(0, 0, 0);
-    if (exit) {
-        exit(exit_code);
-    }
 
     /* If exit is NULL, make sure we don't return. */
     for (;;)
